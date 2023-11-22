@@ -5,3 +5,15 @@
 [x-cloak] {
     display: none;
 }
+
+/* Card */
+@media (min-width: 768px){
+    .card-img{
+        width: 155px;
+        height: 155px;
+    }
+    .img-detail{
+        width: 320px;
+        height: 320px;
+    }
+}
