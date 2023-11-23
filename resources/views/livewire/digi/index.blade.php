@@ -8,6 +8,7 @@
             
             <!-- Card Digimons -->
             <h2 wire:loading="digimons" class="text-center font-bold w-full">Cargando...</h2>
+            <h2 class="{{ $errorMessage ? '' : 'hidden' }} text-center font-bold">{{ $errorMessage }}</h2>
             <div wire:loading.remove="digimons" class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             @if (count($digimons) > 0)
                 @foreach ($digimons as $digimon)
@@ -21,7 +22,7 @@
         <br>
 
         <!-- Pagination -->
-        <nav aria-label="Page navigation example" class="sm:inline:block" style="text-align: center" wire:loading.remove="digimons">
+        <nav aria-label="Page navigation example" class="sm:inline:block {{ count($digimons) <= 0 ? 'hidden' : '' }}" style="text-align: center" wire:loading.remove="digimons">
             <livewire:components.pagination :wire:key="$currentPage.$nextPage.$previousPage.$totalPages" :currentPage="$currentPage" :nextPage="$nextPage" :previousPage="$previousPage" :totalPages="$totalPages"></livewire:components.pagination>
         </nav>
         @if ($digiData)

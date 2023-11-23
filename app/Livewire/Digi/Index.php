@@ -19,6 +19,7 @@ class Index extends Component
     public $nextPage = 1;
     public $previousPage;
     public $totalPages;
+    public $errorMessage = '';
 
     protected $listeners = ['closeModal', 'setPage', 'openModal'];
 
@@ -28,16 +29,21 @@ class Index extends Component
 
     public function getData()
     {
-        $this->data = Http::get($this->endpoint . '?pageSize='.$this->quantity.'&page='.$this->page)->json();
-        if(!isset($this->data['content'])){
-            $this->digimons = [];
-        }else{
-            $this->digimons = $this->data['content'];
-        }
-        $this->currentPage = $this->data['pageable']['currentPage'];
-        $this->nextPage = ($this->currentPage + 1);
-        $this->previousPage = $this->data['pageable']['currentPage'] > 0 ? ($this->data['pageable']['currentPage'] - 1) : '';
-        $this->totalPages = $this->data['pageable']['totalPages'];
+            $this->data = Http::get($this->endpoint . '?pageSize='.$this->quantity.'&page='.$this->page)->json();
+            if(!isset($this->data['content'])){
+                $this->digimons = [];
+                $this->errorMessage = 'Lo sentimos, en estos momentos no podemos mostrarte tus digimons favoritos :(.';
+            }else{
+                $this->digimons = $this->data['content'];
+                $this->currentPage = $this->data['pageable']['currentPage'];
+                $this->nextPage = ($this->currentPage + 1);
+                $this->previousPage = $this->data['pageable']['currentPage'] > 0 ? ($this->data['pageable']['currentPage'] - 1) : '';
+                $this->totalPages = $this->data['pageable']['totalPages'];
+            }
+        
+            
+        
+        
     }
 
     public function render()
