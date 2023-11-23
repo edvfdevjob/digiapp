@@ -2,7 +2,11 @@
 
 # README
 
-## Pasos para Ejecutar Proyecto DigiApp Con Laravel y Livewire
+### Web
+1.https://stingray-app-nhwqz.ondigitalocean.app/
+2. Alojada en DigitalOcean.
+
+## Pasos para Ejecutar Proyecto DigiApp Con Laravel y Livewire (LOCAL)
 
 ### Requisitos previos
 1. Asegúrate de tener [Composer](https://getcomposer.org/) instalado.
