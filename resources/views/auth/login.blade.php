@@ -44,5 +44,12 @@
                 </x-button>
             </div>
         </form>
+        <br>
+        <div class="text-center">
+            <p>¿Aun no te has registrado?</p>
+            <a class="mt-3" href="{{ route('register') }}">
+                <x-button class="m-auto">Registrate</x-button>
+            </a>
+        </div>
     </x-authentication-card>
 </x-guest-layout>
