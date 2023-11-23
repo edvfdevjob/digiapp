@@ -19,11 +19,11 @@ class Index extends Component
     public $nextPage = 1;
     public $previousPage;
     public $totalPages;
-    public $elementsOnPage = 0;
-    
+
+    protected $listeners = ['closeModal', 'setPage', 'openModal'];
+
     public function mount(){
         $this->getData();
-        // $this->loading = false;
     }
 
     public function getData()
@@ -38,38 +38,29 @@ class Index extends Component
         $this->nextPage = ($this->currentPage + 1);
         $this->previousPage = $this->data['pageable']['currentPage'] > 0 ? ($this->data['pageable']['currentPage'] - 1) : '';
         $this->totalPages = $this->data['pageable']['totalPages'];
-        $nextGroup = Http::get($this->endpoint . '?pageSize='.$this->quantity.'&page='.($this->totalPages + 1))->json();
-        $this->elementsOnPage = $nextGroup['pageable']['elementsOnPage'];
-    }
-
-     public function updated($value){
-        if($value=='quantity'){
-            $this->reset( 'digimons', 'currentPage', 'nextPage', 'previousPage', 'totalPages', 'elementsOnPage');
-            $this->getData();
-        }
     }
 
     public function render()
     {
-        $this->reset('digiData', 'modal');
-        $this->getData();
         return view('livewire.digi.index');
+;
     }
 
     public function openModal($id)
     {
         $this->modal = true;
         $this->digiData = Http::get($this->endpoint.'/'.$id)->json();
+        
     }
 
     public function closeModal()
     {
-        $this->reset('digiData', 'modal');
+        $this->modal = false;
+        $this->reset('digiData');
     }
 
     public function setPage($page)
     {
-        $this->quantity = $this->quantity;
         $this->page = $page;
         $this->getData();
     }

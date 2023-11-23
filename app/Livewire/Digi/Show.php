@@ -5,11 +5,16 @@ namespace App\Livewire\Digi;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
-class Show
+class Show extends Component
 {
-    public function mount()
+    public $modal;
+    public $digiData;
+
+    public function closeModal()
     {
+        $this->dispatch('closeModal');
     }
+
     public function render()
     {
         return view('livewire.digi.show');

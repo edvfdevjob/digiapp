@@ -6,14 +6,68 @@
     display: none;
 }
 
-/* Card */
+.body{
+    background-color: aqua;
+}
+
+@media (min-width: 320px){
+    /* Card */
+    .card-dig{
+        width: 250px;
+        min-height: 320px;
+    }
+    .card-img{
+        width: 215px;
+        height: 215px;
+    }
+    /* Details */
+    .img-detail{
+        width: 320px;
+        height: 320px;
+    }
+
+    /* Login */
+    .logo{
+        width: 250px;
+        height: auto;
+    }
+
+    /* Navbar */
+    .logo-nav{
+        width: 110px;
+    }
+
+    /* Main */
+    .text-main{
+        font-family: 'Almendra SC', serif;
+        font-family: 'Poppins', sans-serif;
+        font-size: 25px;
+    }
+}
 @media (min-width: 768px){
+    /* Card */
+    .card-dig{
+        width: auto;
+        height: 300px;
+    }
     .card-img{
         width: 155px;
         height: 155px;
     }
+    /* Details */
     .img-detail{
         width: 320px;
         height: 320px;
+    }
+
+    /* Login */
+    .logo{
+        width: 250px;
+        height: auto;
+    }
+
+    /* Navbar */
+    .logo-nav{
+        width: 110px;
     }
 }

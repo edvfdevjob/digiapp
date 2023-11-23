@@ -9,10 +9,9 @@
 
     <x-slot name="form">
         <!-- Profile Photo -->
-        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
+            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4 ">
                 <!-- Profile Photo File Input -->
-                <input type="file" id="photo" class="hidden"
+                <input type="file" id="photo" style="display:none"
                             wire:model.live="photo"
                             x-ref="photo"
                             x-on:change="
@@ -28,11 +27,15 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                @if (Auth::user()->profile_photo_path)
+                    <img class="h-12 w-12 rounded-full object-cover" src="/storage/{{Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" />
+                @else
+                    <img class="h-12 w-12 rounded-full object-cover" src="{{Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" /> 
+                @endif
                 </div>
 
                 <!-- New Profile Photo Preview -->
-                <div class="mt-2" x-show="photoPreview" style="display: none;">
+                <div class="mt-2" x-show="photoPreview">
                     <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
                           x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                     </span>
@@ -42,15 +45,8 @@
                     {{ __('Select A New Photo') }}
                 </x-secondary-button>
 
-                @if ($this->user->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
-                    </x-secondary-button>
-                @endif
-
                 <x-input-error for="photo" class="mt-2" />
             </div>
-        @endif
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
